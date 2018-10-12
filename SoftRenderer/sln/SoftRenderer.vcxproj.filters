@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{3c9ca4d1-a2b8-4da8-830c-96c822cfff7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core">
+      <UniqueIdentifier>{c9d22cfc-0ca5-4fd0-8dee-78f3e3f2c30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\Graphic">
+      <UniqueIdentifier>{27894db1-fbaa-4f8c-92ac-11fc11a2bf03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\Graphic\Pipeline">
+      <UniqueIdentifier>{6f6e4c7f-dc78-479b-8503-ae28cd87d548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\Graphic\Renderer">
+      <UniqueIdentifier>{a11e649a-209a-4ae2-91ca-aadacfe240ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\Base">
+      <UniqueIdentifier>{6029371a-d472-41a6-97e1-2087b279fdf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\App">
+      <UniqueIdentifier>{52be00a6-d817-4cea-bb59-e64db36f77d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core\Utils">
+      <UniqueIdentifier>{5a37283e-e600-4b25-8bce-8ddb7901075c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Pipeline\Pipeline.cpp">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Renderer\Renderer.cpp">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Base\BaseType.cpp">
+      <Filter>src\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\App\Application.cpp">
+      <Filter>src\Core\App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Renderer\DeviceAPI.cpp">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Pipeline\PipelineContex.cpp">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Renderer\Rasterizer.cpp">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\Pipeline.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineStage.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Renderer\Renderer.h">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Base\BaseType.h">
+      <Filter>src\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\App\Application.h">
+      <Filter>src\Core\App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Utils\Utils.h">
+      <Filter>src\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineContex.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Renderer\DeviceAPI.h">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage2.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Renderer\Rasterizer.h">
+      <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
