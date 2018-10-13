@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+SoftRenderer/sln/.vs/
+SoftRenderer/sln/Debug/
+SoftRenderer/sln/x64/
