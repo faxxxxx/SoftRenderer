@@ -22,6 +22,14 @@ bool Color::operator!=(const Color& right) const {
 	return !(*this == right);
 }
 
+Triangle CreateTri(Vertex v1, Vertex v2, Vertex v3) {
+	Triangle ret;
+	ret.verts[0] = v1;
+	ret.verts[1] = v2;
+	ret.verts[2] = v3;
+	return ret;
+}
+
 float Lerp(float from, float to, float percentage) {
 	return from + (to - from) * percentage;
 }
@@ -43,8 +51,8 @@ Vector3f Lerp(const Vector3f &from, const Vector3f &to, float percentage) {
 	return ret;
 }
 
-Vertex Lerp(const Vertex &from, const Vertex &to, float percentage) {
-	Vertex ret;
+Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
+	Fragment ret;
 	ret.pos = Lerp(from.pos, to.pos, percentage);
 	ret.color = Lerp(from.color, to.color, percentage);
 	ret.normal = Lerp(from.normal, to.normal, percentage);

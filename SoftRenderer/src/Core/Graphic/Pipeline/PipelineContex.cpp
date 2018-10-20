@@ -1,5 +1,7 @@
 #include "PipelineContex.h"
 
 void PipelineContex::Clear() {
-	_vertexs.clear();
+	_vertexes.clear();
+	_indexes.clear();
+	_fragments.clear();
 }

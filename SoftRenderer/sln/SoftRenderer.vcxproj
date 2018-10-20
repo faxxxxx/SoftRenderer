@@ -129,6 +129,7 @@
     <ClCompile Include="..\src\Core\Graphic\Camera\Camera.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\Pipeline.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\PipelineContex.cpp" />
+    <ClCompile Include="..\src\Core\Graphic\Pipeline\RasterizationStage.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\DeviceAPI.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\Rasterizer.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\Renderer.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="..\src\Core\Graphic\Pipeline\Pipeline.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineContex.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineStage.h" />
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\RasterizationStage.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage2.h" />
     <ClInclude Include="..\src\Core\Graphic\Renderer\DeviceAPI.h" />

@@ -9,5 +9,7 @@ class PipelineContex {
 
  public:
 	IDeviceAPI * _pDeviceAPI;
-	std::vector<Vertex> _vertexs;
+	std::vector<Vertex> _vertexes;
+	std::vector<int> _indexes;
+	std::vector<Fragment> _fragments;
 };

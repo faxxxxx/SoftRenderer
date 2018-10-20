@@ -2,7 +2,7 @@
 
 class ScanLine {
  public:
-	void ToVertexs(std::vector<Vertex> &outVec) {
+	void ToVertexs(std::vector<Fragment> &outVec) {
 		int fx = _left.pos.x;
 		int tx = _right.pos.x;
 		int w = tx - fx;
@@ -16,7 +16,7 @@ class ScanLine {
 	Vertex _right;
 };
 
-void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Vertex & p3, std::vector<Vertex> &outVec) {
+void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Vertex & p3, std::vector<Fragment> &outVec) {
 	Vertex pp1;
 	Vertex pp2;
 	Vertex pp3;
@@ -58,7 +58,7 @@ void Swap(Vertex &v1, Vertex &v2) {
 	v2 = tmp;
 }
 
-void Rasterizer::Rasterize(const Vertex& p1, const Vertex& p2, const Vertex& p3, std::vector<Vertex> &outVec) {
+void Rasterizer::Rasterize(const Vertex& p1, const Vertex& p2, const Vertex& p3, std::vector<Fragment> &outVec) {
 	if (p1.pos.y == p2.pos.y
 	    || p2.pos.y == p3.pos.y
 	    || p1.pos.y == p3.pos.y) {

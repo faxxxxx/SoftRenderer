@@ -135,7 +135,11 @@ struct Triangle {
 	Vertex verts[3];
 };
 
-Triangle CreateTri(Vector3f p1, Color c1, Vector3f p2, Color c2, Vector3f p3, Color c3);
+struct Fragment : public Vertex {
+
+};
+
+Triangle CreateTri(Vertex v1, Vertex v2, Vertex v3);
 
 float Lerp(float from, float to, float percentage);
 
@@ -143,4 +147,4 @@ Color Lerp(const Color &from, const Color &to, float percentage);
 
 Vector3f Lerp(const Vector3f &from, const Vector3f &to, float percentage);
 
-Vertex Lerp(const Vertex &from, const Vertex &to, float percentage);
+Fragment Lerp(const Vertex &from, const Vertex &to, float percentage);

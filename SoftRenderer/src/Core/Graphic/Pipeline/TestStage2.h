@@ -7,7 +7,16 @@
 
 class TestStage2 : public PipelineStage {
  public:
+	Camera _cam;
+
+	TestStage2() {
+		_cam.SetClippingPlanes(100, 1000);
+		_cam.SetProjectionType(Camera::Perspective);
+		_cam.SetFieldOfView(45);
+	}
+
 	virtual bool Execute(PipelineContex *ctx) override {
+		_cam.SetViewPort(ctx->_pDeviceAPI->PixelWidth(), ctx->_pDeviceAPI->PixelHeight());
 		//for (int i = 0; i < 1000; i++)
 		//{
 		//	int x = rand() % ctx->_pDeviceAPI->PixelWidth();
@@ -41,21 +50,21 @@ class TestStage2 : public PipelineStage {
 		v3.color = Color(0, 0, 1.0f, 1.0f);
 		v3.pos = Vector3f(0.9f * w, 200, 0.0f);
 
-		std::vector<Vertex> pts;
+		std::vector<Fragment> pts;
 		pts.reserve(w*h);
 		Rasterizer::Rasterize(v1, v2, v3, pts);
 		for (auto &pt : pts) {
 			ctx->_pDeviceAPI->DrawPixel(Vector2f(pt.pos.x, pt.pos.y), pt.color);
 		}
 
-		Camera cam;
-		cam.SetClippingPlanes(100, 1000);
-		cam.SetProjectionType(Camera::Perspective);
-		cam.SetFieldOfView(45);
-		cam.SetViewPort(ctx->_pDeviceAPI->PixelWidth(), ctx->_pDeviceAPI->PixelHeight());
-
-		Matrix4x4f mat = cam.GetProjectMatrix();
-
 		return true;
+	}
+
+ private:
+	void DrawTriangle(Triangle &tri, int w, int h, bool wired) {
+		Matrix4x4f mat = _cam.GetProjectMatrix();
+		if (wired) {
+
+		}
 	}
 };
