@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Core/Graphic/Pipeline/TestStage.h"
 #include "Core/Graphic/Pipeline/TestStage2.h"
+#include "Core/Graphic/Pipeline/FragmentStage.h"
+#include "Core/Graphic/Pipeline/RasterizationStage.h"
 #include "DeviceAPI.h"
 
 Renderer::Renderer() {
@@ -34,9 +36,12 @@ void Renderer::Render() {
 void Renderer::SetupPipeline() {
 	_pPipeline = new Pipeline();
 	auto *pCtx = new PipelineContex();
-	pCtx->_pDeviceAPI = _pDeviceAPI;
+	pCtx->Init(_pDeviceAPI);
 	_pPipeline->SetContex(pCtx);
-	_pPipeline->AddStage(new TestStage()).AddStage(new TestStage2());
+	_pPipeline->AddStage(new TestStage())
+	.AddStage(new TestStage2())
+	.AddStage(new RasterizationStage())
+	.AddStage(new FragmentStage());
 }
 
 void Renderer::DoRender() {

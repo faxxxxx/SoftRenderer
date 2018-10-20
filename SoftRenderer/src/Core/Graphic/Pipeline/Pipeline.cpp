@@ -2,7 +2,10 @@
 #include "Pipeline.h"
 
 Pipeline & Pipeline::AddStage(PipelineStage *_pStage) {
-	_stages.push_back(_pStage);
+	if (_pStage) {
+		_pStage->Init(_pCtx);
+		_stages.push_back(_pStage);
+	}
 	return *this;
 }
 

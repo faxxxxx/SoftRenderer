@@ -9,14 +9,24 @@ class TestStage2 : public PipelineStage {
  public:
 	Camera _cam;
 
+	std::vector<Vertex> _verts;
+	std::vector<unsigned int> _indexes;
+
 	TestStage2() {
+		Vertex v1;
+		v1.color = Color(1.0f, 0.0, 0, 1.0f);
+		v1.pos = Vector3f(0.75f, 300, 0.0f);
+		_verts.push_back(v1);
+	}
+
+	virtual void Init(PipelineContex *ctx) override {
 		_cam.SetClippingPlanes(100, 1000);
 		_cam.SetProjectionType(Camera::Perspective);
 		_cam.SetFieldOfView(45);
+		_cam.SetViewPort(ctx->_pDeviceAPI->PixelWidth(), ctx->_pDeviceAPI->PixelHeight());
 	}
 
 	virtual bool Execute(PipelineContex *ctx) override {
-		_cam.SetViewPort(ctx->_pDeviceAPI->PixelWidth(), ctx->_pDeviceAPI->PixelHeight());
 		//for (int i = 0; i < 1000; i++)
 		//{
 		//	int x = rand() % ctx->_pDeviceAPI->PixelWidth();
@@ -61,10 +71,4 @@ class TestStage2 : public PipelineStage {
 	}
 
  private:
-	void DrawTriangle(Triangle &tri, int w, int h, bool wired) {
-		Matrix4x4f mat = _cam.GetProjectMatrix();
-		if (wired) {
-
-		}
-	}
 };
