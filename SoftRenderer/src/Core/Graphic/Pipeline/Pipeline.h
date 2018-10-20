@@ -5,17 +5,21 @@
 
 class Pipeline {
 
-public:
+ public:
 	Pipeline() {}
 
-	void SetContex(PipelineContex *ctx) { _pCtx = ctx; }
+	void SetContex(PipelineContex *ctx) {
+		_pCtx = ctx;
+	}
 	Pipeline &AddStage(PipelineStage *_pStage);
 
 	void Start();
 
-	PipelineContex* GetContext() { return _pCtx; }
+	PipelineContex* GetContext() {
+		return _pCtx;
+	}
 
-private:
+ private:
 	PipelineContex* _pCtx = nullptr;
 	std::vector<PipelineStage *> _stages;
 };

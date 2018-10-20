@@ -3,7 +3,7 @@
 #include "Core/Base/BaseType.h"
 
 class IDeviceAPI {
-public:
+ public:
 	virtual ~IDeviceAPI() {}
 	virtual void DrawPixel(int x, int y, const Color & color) = 0;
 	virtual void DrawPixel(const Vector2f &pos, const Color & color) = 0;
@@ -14,7 +14,7 @@ public:
 
 class DeviceAPI : public IDeviceAPI {
 
-public:
+ public:
 	static DeviceAPI * Create(SDL_Window *pWindow);
 	virtual void DrawPixel(int x, int y, const Color & color) override;
 	virtual void DrawPixel(const Vector2f &pos, const Color & color) override;
@@ -26,11 +26,11 @@ public:
 	void Clear();
 	void EndRender();
 
-private:
+ private:
 	DeviceAPI() {}
 	bool Init(SDL_Window *pWindow);
 
-private:
+ private:
 	SDL_Surface * _pSurface = nullptr;
 	SDL_Surface *_pBackSurface = nullptr;
 	SDL_Window *_pWindow = nullptr;

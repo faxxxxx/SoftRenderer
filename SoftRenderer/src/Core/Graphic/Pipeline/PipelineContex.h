@@ -5,10 +5,10 @@
 class IRenderer;
 class PipelineContex {
 
-public:
+ public:
 	void Clear();
 
-public:
+ public:
 	IDeviceAPI *_pDeviceAPI;
 	std::vector<Vertex> _vertexs;
 };

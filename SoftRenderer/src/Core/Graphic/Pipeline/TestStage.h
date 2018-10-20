@@ -1,12 +1,10 @@
 #pragma once
 #include "PipelineStage.h"
 
-class TestStage : public PipelineStage
-{
+class TestStage : public PipelineStage {
 
-public:
-	virtual bool Execute(PipelineContex *ctx) override
-	{
+ public:
+	virtual bool Execute(PipelineContex *ctx) override {
 		//for (int i = 0; i < 1000; i++)
 		//{
 		//	int x = rand() % ctx->_pDeviceAPI->PixelWidth();

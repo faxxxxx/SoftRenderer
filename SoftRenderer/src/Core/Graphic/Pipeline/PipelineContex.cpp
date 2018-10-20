@@ -1,6 +1,5 @@
 #include "PipelineContex.h"
 
-void PipelineContex::Clear()
-{
+void PipelineContex::Clear() {
 	_vertexs.clear();
 }

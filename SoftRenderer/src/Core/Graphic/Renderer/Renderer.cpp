@@ -4,15 +4,12 @@
 #include "Core/Graphic/Pipeline/TestStage2.h"
 #include "DeviceAPI.h"
 
-Renderer::Renderer()
-{
+Renderer::Renderer() {
 }
 
-bool Renderer::Init(SDL_Window * pWindow)
-{
+bool Renderer::Init(SDL_Window * pWindow) {
 	bool ret = false;
-	do 
-	{
+	do {
 		BREAK_IF(!pWindow);
 		_pDeviceAPI = DeviceAPI::Create(pWindow);
 		BREAK_IF(!_pDeviceAPI);
@@ -25,10 +22,8 @@ bool Renderer::Init(SDL_Window * pWindow)
 }
 
 
-void Renderer::Render()
-{
-	if (!_pDeviceAPI)
-	{
+void Renderer::Render() {
+	if (!_pDeviceAPI) {
 		return;
 	}
 
@@ -37,8 +32,7 @@ void Renderer::Render()
 	_pDeviceAPI->EndRender();
 }
 
-void Renderer::SetupPipeline()
-{
+void Renderer::SetupPipeline() {
 	_pPipeline = new Pipeline();
 	auto *pCtx = new PipelineContex();
 	pCtx->_pDeviceAPI = _pDeviceAPI;
@@ -46,8 +40,7 @@ void Renderer::SetupPipeline()
 	_pPipeline->AddStage(new TestStage()).AddStage(new TestStage2());
 }
 
-void Renderer::DoRender()
-{
+void Renderer::DoRender() {
 	auto ctx = _pPipeline->GetContext();
 	ctx->Clear();
 

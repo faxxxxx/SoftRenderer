@@ -25,6 +25,9 @@
     <Filter Include="src\Core\Utils">
       <UniqueIdentifier>{5a37283e-e600-4b25-8bce-8ddb7901075c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Core\Graphic\Camera">
+      <UniqueIdentifier>{465aaa06-1739-4240-9cb4-a63c46b35b53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Core\Graphic\Renderer\Rasterizer.cpp">
       <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Camera\Camera.cpp">
+      <Filter>src\Core\Graphic\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Base\Matrix.cpp">
+      <Filter>src\Core\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Core\Graphic\Renderer\Rasterizer.h">
       <Filter>src\Core\Graphic\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Camera\Camera.h">
+      <Filter>src\Core\Graphic\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Base\Matrix.h">
+      <Filter>src\Core\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -125,6 +125,8 @@
   <ItemGroup>
     <ClCompile Include="..\src\Core\App\Application.cpp" />
     <ClCompile Include="..\src\Core\Base\BaseType.cpp" />
+    <ClCompile Include="..\src\Core\Base\Matrix.cpp" />
+    <ClCompile Include="..\src\Core\Graphic\Camera\Camera.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\Pipeline.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\PipelineContex.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\DeviceAPI.cpp" />
@@ -135,6 +137,8 @@
   <ItemGroup>
     <ClInclude Include="..\src\Core\App\Application.h" />
     <ClInclude Include="..\src\Core\Base\BaseType.h" />
+    <ClInclude Include="..\src\Core\Base\Matrix.h" />
+    <ClInclude Include="..\src\Core\Graphic\Camera\Camera.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\Pipeline.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineContex.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\PipelineStage.h" />

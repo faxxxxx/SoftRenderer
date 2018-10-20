@@ -2,17 +2,16 @@
 #include "SDL.h"
 #include "Core/Graphic/Renderer/Renderer.h"
 
-class Application
-{
-public:
+class Application {
+ public:
 	Application();
 	bool Init(int screenWidth, int screenHeight);
 	void Run();
 
-private:
+ private:
 	void Loop();
 
-private:
+ private:
 	int _screenWidth = 0;
 	int _screenHeight = 0;
 	SDL_Window *_pWindow = nullptr;
