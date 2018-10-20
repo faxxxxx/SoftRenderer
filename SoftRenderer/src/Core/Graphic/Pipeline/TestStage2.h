@@ -6,7 +6,6 @@
 #include "Rasterizer.h"
 
 class TestStage2 : public PipelineStage {
-
  public:
 	virtual bool Execute(PipelineContex *ctx) override {
 		//for (int i = 0; i < 1000; i++)
@@ -56,8 +55,6 @@ class TestStage2 : public PipelineStage {
 		cam.SetViewPort(ctx->_pDeviceAPI->PixelWidth(), ctx->_pDeviceAPI->PixelHeight());
 
 		Matrix4x4f mat = cam.GetProjectMatrix();
-
-		
 
 		return true;
 	}

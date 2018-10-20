@@ -4,7 +4,6 @@
 #include <vector>
 
 class Pipeline {
-
  public:
 	Pipeline() {}
 
@@ -20,6 +19,6 @@ class Pipeline {
 	}
 
  private:
-	PipelineContex* _pCtx = nullptr;
+	PipelineContex * _pCtx = nullptr;
 	std::vector<PipelineStage *> _stages;
 };

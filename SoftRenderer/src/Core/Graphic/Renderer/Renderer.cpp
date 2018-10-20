@@ -21,7 +21,6 @@ bool Renderer::Init(SDL_Window * pWindow) {
 	return ret;
 }
 
-
 void Renderer::Render() {
 	if (!_pDeviceAPI) {
 		return;

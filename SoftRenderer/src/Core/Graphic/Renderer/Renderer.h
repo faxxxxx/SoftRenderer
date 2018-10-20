@@ -15,6 +15,6 @@ class Renderer {
 	void DoRender();
 
  private:
-	Pipeline *_pPipeline = nullptr;
+	Pipeline * _pPipeline = nullptr;
 	DeviceAPI *_pDeviceAPI = nullptr;
 };

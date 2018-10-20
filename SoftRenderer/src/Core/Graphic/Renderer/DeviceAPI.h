@@ -13,7 +13,6 @@ class IDeviceAPI {
 };
 
 class DeviceAPI : public IDeviceAPI {
-
  public:
 	static DeviceAPI * Create(SDL_Window *pWindow);
 	virtual void DrawPixel(int x, int y, const Color & color) override;

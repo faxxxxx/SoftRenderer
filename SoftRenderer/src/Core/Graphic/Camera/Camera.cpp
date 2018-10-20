@@ -21,8 +21,7 @@ void Camera::SetFieldOfView(float fov) {
 		_fov = FovMax;
 }
 
-Matrix4x4f Camera::GetProjectMatrix()
-{
+Matrix4x4f Camera::GetProjectMatrix() {
 	Matrix4x4f ret;
 	float rr = (float)_viewPortHeight / _viewPortWidth; // 1/r
 	float a = _fov / 2.0f * PI / 180.0f;
@@ -30,7 +29,7 @@ Matrix4x4f Camera::GetProjectMatrix()
 	float f = _clippingPlanesFar;
 	float n = _clippingPlanesNear;
 	float d = f - n;
-	
+
 	ret[0] = rr * v; // 1/r * cot(a/2)
 	ret[5] = v;// cot(a/2)
 	ret[10] = f / d;
@@ -39,8 +38,7 @@ Matrix4x4f Camera::GetProjectMatrix()
 	return ret;
 }
 
-void Camera::SetViewPort(int w, int h)
-{
+void Camera::SetViewPort(int w, int h) {
 	_viewPortWidth = w;
 	_viewPortHeight = h;
 }

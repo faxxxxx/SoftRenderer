@@ -7,7 +7,7 @@ class ScanLine {
 		int tx = _right.pos.x;
 		int w = tx - fx;
 		int delta = tx > fx ? 1 : -1;
-		for (int x = fx; x != tx; x+=delta) {
+		for (int x = fx; x != tx; x += delta) {
 			outVec.push_back(Lerp(_left, _right, abs(float(x - fx) / w)));
 		}
 	}
