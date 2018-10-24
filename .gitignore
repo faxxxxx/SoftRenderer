@@ -34,3 +34,10 @@
 SoftRenderer/sln/.vs/
 SoftRenderer/sln/Debug/
 SoftRenderer/sln/x64/
+
+*/.DS_Store
+.DS_Store
+.vs
+SoftRenderer/src/.vscode/c_cpp_properties.json
+xcuserdata
+c_cpp_properties.json
