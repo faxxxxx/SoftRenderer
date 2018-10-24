@@ -28,6 +28,9 @@
     <Filter Include="src\Core\Graphic\Camera">
       <UniqueIdentifier>{465aaa06-1739-4240-9cb4-a63c46b35b53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Core\Graphic\Texture">
+      <UniqueIdentifier>{815306e7-4375-4024-848c-db6a4027a185}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -65,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Core\Graphic\Pipeline\FragmentStage.cpp">
       <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Pipeline\ZTestStage.cpp">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Graphic\Texture\Texture.cpp">
+      <Filter>src\Core\Graphic\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Core\Graphic\Pipeline\FragmentStage.h">
       <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Pipeline\ZTestStage.h">
+      <Filter>src\Core\Graphic\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Core\Graphic\Texture\Texture.h">
+      <Filter>src\Core\Graphic\Texture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
