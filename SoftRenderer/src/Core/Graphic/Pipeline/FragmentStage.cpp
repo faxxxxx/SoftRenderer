@@ -1,12 +1,39 @@
 #include "FragmentStage.h"
+#include "Core/Graphic/Texture/Texture.h"
+
+Texture *pTex = nullptr;
+
+void FragmentStage::Init(PipelineContex *ctx) {
+    pTex = new Texture();
+    pTex->Load("box.png");
+}
 
 bool FragmentStage::Execute(PipelineContex * ctx) {
+    auto w = ctx->_pDeviceAPI->PixelWidth();
+    auto h = ctx->_pDeviceAPI->PixelHeight();
+    auto maxIdx = w * h;
+    Color c;
 	for (auto& frag : ctx->_fragments) {
 		int idx = ToBufferIndex(frag.pos, ctx);
+        
+        if (idx < 0 || idx >= maxIdx)
+            continue;
+        
 		if (ZTestPass(idx, frag.pos.z, ctx)) {
-			ColorBlend(idx, frag.color, ctx);
+            c = ctx->IsWireFrameMode() ? frag.color : pTex->GetColor(frag.uv);
+            ColorBlend(idx, c, ctx);
 		}
 	}
+    
+    for(int i = 0; i < h; i++)
+    {
+        for(int j = 0; j < w; j++)
+        {
+            auto &c = ctx->_colorBuffer[i * w + j];
+            ctx->_pDeviceAPI->DrawPixel(j, (h-i-1), c);
+        }
+    }
+    
 	return false;
 }
 
@@ -25,8 +52,5 @@ void FragmentStage::ColorBlend(int idx, const Color &c, PipelineContex *ctx) {
 
 int FragmentStage::ToBufferIndex(const Vector3f &pos, PipelineContex *ctx) {
 	auto w = ctx->_pDeviceAPI->PixelWidth();
-	auto h = ctx->_pDeviceAPI->PixelHeight();
-	int x = (int)((pos.x + 2) * 0.5f * w);
-	int y = (int)((pos.y + 2) * 0.5f * h);
-	return y * w + x;
+	return pos.y * w + pos.x;
 }

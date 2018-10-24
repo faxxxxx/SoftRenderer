@@ -3,6 +3,7 @@
 
 class FragmentStage : public PipelineStage {
  public:
+    virtual void Init(PipelineContex *ctx) override;
 	virtual bool Execute(PipelineContex *ctx) override;
 
  private:

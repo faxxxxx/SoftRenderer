@@ -20,7 +20,7 @@ bool Application::Init(int screenWidth, int screenHeight) {
 			break;
 		}
 
-		_pWindow = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN);
+		_pWindow = SDL_CreateWindow("SoftRenderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN);
 		if (!_pWindow) {
 			std::cout << "Create window fail : " << SDL_GetError() << std::endl;
 			break;

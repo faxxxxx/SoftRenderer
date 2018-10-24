@@ -2,6 +2,7 @@
 #include "../../Base/BaseType.h"
 #include <iostream>
 #include <cfloat>
+#include <math.h>
 
 DeviceAPI * DeviceAPI::Create(SDL_Window * pWindow) {
 	DeviceAPI *ret = new DeviceAPI();
@@ -23,6 +24,10 @@ int SD_Flip(SDL_Surface *pBackSurface, SDL_Surface *pSurface, SDL_Window *pWindo
 }
 
 void DeviceAPI::DrawPixel(int x, int y, const Color & color) {
+    if (x < 0 || x >= PixelWidth() ||
+        y < 0 || y >= PixelHeight())
+        return;
+    
 	int lpitch = (_pBackSurface->pitch >> 2);
 	uint32_t* video_buffer = (uint32_t*)_pBackSurface->pixels;
 	video_buffer[x + y * lpitch] = color.toInt();
@@ -47,8 +52,8 @@ void DeviceAPI::DrawLine(const Vector2f &from, const Vector2f &to, const Color &
 		k = (float)dy / dx;
 	}
 
-	//dxµÈÓÚ0£¬k»¹ÊÇ´óÓÚ1£¬ÐèÒª·­×ª×ø±êÏµ
-	if (abs(k) > 1 || abs(dx) <= FLT_MIN) {
+	//dxï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½kï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ïµ
+	if (fabs(k) > 1 || fabs(dx) <= FLT_MIN) {
 		std::swap(fx, fy);
 		std::swap(tx, ty);
 		std::swap(dx, dy);
@@ -56,7 +61,7 @@ void DeviceAPI::DrawLine(const Vector2f &from, const Vector2f &to, const Color &
 		inverse = true;
 	}
 
-	//x´ÓÐ¡µ½´ó
+	//xï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
 	if (fx > tx) {
 		std::swap(fx, tx);
 		std::swap(fy, ty);
