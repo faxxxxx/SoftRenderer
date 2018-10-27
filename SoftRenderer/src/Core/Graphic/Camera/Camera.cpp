@@ -44,37 +44,37 @@ void Camera::SetViewPort(int w, int h) {
 }
 
 void Camera::SetPosition(const Vector3f &pos) {
-    _pos = pos;
+	_pos = pos;
 }
 
 void Camera::SetLookAt(const Vector3f &dir) {
-    _lookAt = dir;
-    _lookAt.Normalize();
+	_lookAt = dir;
+	_lookAt.Normalize();
 }
 
 Matrix4x4f Camera::GetCameraMatix() {
-    Matrix4x4f ret;
-    auto right = Vector3f(0.0f, 1.0f, 0.0f).Cross(_lookAt);
-    right.Normalize();
-    auto up = _lookAt.Cross(right);
-    up.Normalize();
-    
-    ret[0] = right.x;
-    ret[1] = right.y;
-    ret[2] = right.z;
-    ret[4] = up.x;
-    ret[5] = up.y;
-    ret[6] = up.z;
-    ret[8] = _lookAt.x;
-    ret[9] = _lookAt.y;
-    ret[10] = _lookAt.z;
-    
-    ret[3] = -right.Dot(_pos);
-    ret[7] = -up.Dot(_pos);
-    ret[11] = -_lookAt.Dot(_pos);
-    
-    ret[12] = ret[13] = ret[14] = 0.0f;
-    return ret;
+	Matrix4x4f ret;
+	auto right = _lookAt.Cross(Vector3f::Up);
+	right.Normalize();
+	auto up = right.Cross(_lookAt);
+	up.Normalize();
+
+	ret.Get(0, 0) = right.x;
+	ret.Get(1, 0) = right.y;
+	ret.Get(2, 0) = right.z;
+	ret.Get(0, 1) = up.x;
+	ret.Get(1, 1) = up.y;
+	ret.Get(2, 1) = up.z;
+	ret.Get(0, 2) = _lookAt.x;
+	ret.Get(1, 2) = _lookAt.y;
+	ret.Get(2, 2) = _lookAt.z;
+
+	ret.Get(3, 0) = -right.Dot(_pos);
+	ret.Get(3, 1) = -up.Dot(_pos);
+	ret.Get(3, 2) = -_lookAt.Dot(_pos);
+	ret.Get(3, 3) = 1.0f;
+
+	return ret;
 }
 
 

@@ -132,7 +132,6 @@
     <ClCompile Include="..\src\Core\Graphic\Pipeline\Pipeline.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\PipelineContex.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Pipeline\RasterizationStage.cpp" />
-    <ClCompile Include="..\src\Core\Graphic\Pipeline\ZTestStage.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\DeviceAPI.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\Rasterizer.cpp" />
     <ClCompile Include="..\src\Core\Graphic\Renderer\Renderer.cpp" />
@@ -151,7 +150,6 @@
     <ClInclude Include="..\src\Core\Graphic\Pipeline\RasterizationStage.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage.h" />
     <ClInclude Include="..\src\Core\Graphic\Pipeline\TestStage2.h" />
-    <ClInclude Include="..\src\Core\Graphic\Pipeline\ZTestStage.h" />
     <ClInclude Include="..\src\Core\Graphic\Renderer\DeviceAPI.h" />
     <ClInclude Include="..\src\Core\Graphic\Renderer\Rasterizer.h" />
     <ClInclude Include="..\src\Core\Graphic\Renderer\Renderer.h" />

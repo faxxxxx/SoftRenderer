@@ -69,9 +69,6 @@
     <ClCompile Include="..\src\Core\Graphic\Pipeline\FragmentStage.cpp">
       <Filter>src\Core\Graphic\Pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Core\Graphic\Pipeline\ZTestStage.cpp">
-      <Filter>src\Core\Graphic\Pipeline</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Core\Graphic\Texture\Texture.cpp">
       <Filter>src\Core\Graphic\Texture</Filter>
     </ClCompile>
@@ -120,9 +117,6 @@
       <Filter>src\Core\Graphic\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Core\Graphic\Pipeline\FragmentStage.h">
-      <Filter>src\Core\Graphic\Pipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Core\Graphic\Pipeline\ZTestStage.h">
       <Filter>src\Core\Graphic\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Core\Graphic\Texture\Texture.h">

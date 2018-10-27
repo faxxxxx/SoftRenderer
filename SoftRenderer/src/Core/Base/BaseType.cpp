@@ -1,9 +1,12 @@
 #include "BaseType.h"
 
-float Angle2Rad(float angle)
-{
-    return angle * PI / 180.0f;
+float Angle2Rad(float angle) {
+	return angle * PI / 180.0f;
 }
+
+Vector3f Vector3f::Up(0.0f, 1.0f, 0.0f);
+Vector3f Vector3f::Right(1.0f, 0.0f, 0.0f);
+Vector3f Vector3f::Forward(0.0f, 0.0f, 1.0f);
 
 Color::Color()
 	: r(0.0f)
@@ -27,34 +30,34 @@ bool Color::operator!=(const Color& right) const {
 	return !(*this == right);
 }
 
-bool FloatEqual(float a, float b)
-{
-    return fabs(a - b) <= FLT_MIN;
+bool FloatEqual(float a, float b) {
+	return fabs(a - b) <= FLT_MIN;
 }
 
-bool FloatIsZero(float a)
-{
-    return FloatEqual(a, 0.0f);
+bool FloatIsZero(float a) {
+	return FloatEqual(a, 0.0f);
 }
 
-int FloatCoord2IntLow(float v)
-{
-    return (int)v;
-    if (v - int(v) < 0.05f)
-        return int(v)-1;
-    return int(v)+1;
+void AssertNotZero(float a) {
+	assert(!FloatIsZero(a));
 }
 
-int FloatCoord2IntHigh(float v)
-{
-    return (int)v;
-    if (v - int(v) >= 0.05f)
-        return int(v)+1;
-    return int(v);
+int FloatCoord2IntLow(float v) {
+	return (int)v;
+	if (v - int(v) < 0.05f)
+		return int(v)-1;
+	return int(v)+1;
+}
+
+int FloatCoord2IntHigh(float v) {
+	return (int)v;
+	if (v - int(v) >= 0.05f)
+		return int(v)+1;
+	return int(v);
 }
 
 float Lerp(float from, float to, float percentage) {
-	return from + (to - from) * percentage;
+	return (1 - percentage) * from + percentage * to;
 }
 
 Color Lerp(const Color &from, const Color &to, float percentage) {
@@ -75,18 +78,18 @@ Vector3f Lerp(const Vector3f &from, const Vector3f &to, float percentage) {
 }
 
 Vector2f Lerp(const Vector2f &from, const Vector2f &to, float percentage) {
-    Vector2f ret;
-    ret.x = Lerp(from.x, to.x, percentage);
-    ret.y = Lerp(from.y, to.y, percentage);
-    return ret;
+	Vector2f ret;
+	ret.x = Lerp(from.x, to.x, percentage);
+	ret.y = Lerp(from.y, to.y, percentage);
+	return ret;
 }
 
 Vector2f LerpUV(const Vector2f &from, float fromz, const Vector2f &to, float toz, float percentage) {
-    Vector2f ret;
-    float z = Lerp(fromz, toz, percentage);
-    ret.x = Lerp(from.x / fromz, to.x / toz, percentage) * z;
-    ret.y = Lerp(from.y / fromz, to.y / toz, percentage) * z;
-    return ret;
+	Vector2f ret;
+	float z = Lerp(fromz, toz, percentage);
+	ret.x = Lerp(from.x / fromz, to.x / toz, percentage) * z;
+	ret.y = Lerp(from.y / fromz, to.y / toz, percentage) * z;
+	return ret;
 }
 
 Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
@@ -95,6 +98,6 @@ Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
 	ret.color = Lerp(from.color, to.color, percentage);
 	ret.normal = Lerp(from.normal, to.normal, percentage);
 //    ret.uv = LerpUV(from.uv, from.pos.z, to.uv, to.pos.z, percentage);
-    ret.uv = Lerp(from.uv, to.uv, percentage);
+	ret.uv = Lerp(from.uv, to.uv, percentage);
 	return ret;
 }

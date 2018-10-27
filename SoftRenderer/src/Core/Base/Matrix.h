@@ -47,10 +47,10 @@ class Matrix4x4f {
 	}
 
 	void RotateAxixY(float angle) {
-		_data[0] = cos(Angle2Rad(angle));
-		_data[2] = sin(Angle2Rad(angle));
-		_data[8] = -_data[2];
-		_data[10] = _data[0];
+		Get(0, 0) = cos(Angle2Rad(angle));
+		Get(0, 2) = -sin(Angle2Rad(angle));
+		Get(2, 0) = -Get(0, 2);
+		Get(2, 2) = Get(0, 0);
 	}
 
 	Vector4f MultiplyVector4(const Vector4f& inV) const;
@@ -59,11 +59,10 @@ class Matrix4x4f {
 };
 
 inline void Matrix4x4f::MultiplyVector4(const Vector4f & inV, Vector4f & output) const {
-	output.x = _data[0] * inV.x + _data[1] * inV.y + _data[2] * inV.z + _data[3] * inV.w;
-
-	output.y = _data[4] * inV.x + _data[5] * inV.y + _data[6] * inV.z + _data[7] * inV.w;
-	output.z = _data[8] * inV.x + _data[9] * inV.y + _data[10] * inV.z + _data[11] * inV.w;
-	output.w = _data[12] * inV.x + _data[13] * inV.y + _data[14] * inV.z + _data[15] * inV.w;
+	output.x = Get(0, 0) * inV.x + Get(1, 0) * inV.y + Get(2, 0) * inV.z + Get(3, 0) * inV.w;
+	output.y = Get(0, 1) * inV.x + Get(1, 1) * inV.y + Get(2, 1) * inV.z + Get(3, 1) * inV.w;
+	output.z = Get(0, 2) * inV.x + Get(1, 2) * inV.y + Get(2, 2) * inV.z + Get(3, 2) * inV.w;
+	output.w = Get(0, 3) * inV.x + Get(1, 3) * inV.y + Get(2, 3) * inV.z + Get(3, 3) * inV.w;
 }
 
 inline Vector4f Matrix4x4f::MultiplyVector4(const Vector4f& inV) const {
