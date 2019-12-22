@@ -96,7 +96,7 @@ class TestStage2 : public PipelineStage {
 
 		int w = ctx->_pDeviceAPI->PixelWidth();
 		int h = ctx->_pDeviceAPI->PixelHeight();
-//        ctx->SetWireFrameMode(true);
+        ctx->SetWireFrameMode(false);
 
 		//std::vector<Vector2f> points{
 		//	Vector2f(0.3f * w, 0.5f * h),
@@ -132,7 +132,7 @@ class TestStage2 : public PipelineStage {
         auto camMat = _cam.GetCameraMatix();
         
         Matrix4x4f rotateMat;
-        _angle += 0.4f;
+        _angle += 1.f;
         if (_angle > 360.0f)
         {
             _angle = 0.0f;
@@ -151,9 +151,10 @@ class TestStage2 : public PipelineStage {
 
  private:
     
-    Vector3f ConvertToProjectionSpace(const Vector3f &p, const Matrix4x4f &mat)
+    Vector4f ConvertToProjectionSpace(const Vector4f &p, const Matrix4x4f &mat)
     {
         auto result = mat.MultiplyVector4(Vector4f(p));
-        return Vector3f(result.x/result.w, result.y/result.w, result.z/result.w);
+        auto ww = 1.0f/result.w;
+        return Vector4f(result.x * ww, result.y * ww, result.z * ww, result.w);
     }
 };

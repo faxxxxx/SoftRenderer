@@ -6,23 +6,22 @@
 class ScanLine {
  public:
 	void ToVertexs(std::vector<Fragment> &outVec) {
-        if (_left.pos.x < _right.pos.x)
+        const Vertex* pLeft = &_left;
+        const Vertex* pRight = &_right;
+        if (_left.pos.x > _right.pos.x)
         {
-            int fx = FloatCoord2IntLow(_left.pos.x);
-            int tx = FloatCoord2IntHigh(_right.pos.x);
-            int w = tx - fx;
-            for (int x = fx; x <= tx; x++) {
-                outVec.push_back(Lerp(_left, _right, fabs(float(x - fx) / w)));
-            }
+            pLeft = &_right;
+            pRight = &_left;
         }
-        else
-        {
-            int fx = FloatCoord2IntLow(_right.pos.x);
-            int tx = FloatCoord2IntHigh(_left.pos.x);
-            int w = tx - fx;
-            for (int x = fx; x <= tx; x++) {
-                outVec.push_back(Lerp(_right, _left, fabs(float(x - fx) / w)));
-            }
+        
+        int fx = FloatCoord2IntLow(pLeft->pos.x);
+        int tx = FloatCoord2IntHigh(pRight->pos.x);
+        int w = tx - fx;
+        for (int x = 0; x <= w; x++) {
+            auto v = Lerp(*pLeft, *pRight, float(x) / w);
+            v.pos.y = pLeft->pos.y;
+            v.pos.x = fx + x;
+            outVec.push_back(v);
         }
 	}
 
@@ -31,27 +30,34 @@ class ScanLine {
 };
 
 void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Vertex & p3, std::vector<Fragment> &outVec) {
-	Vertex pp1;
-	Vertex pp2;
-	Vertex pp3;
+	const Vertex* pp1 = nullptr;
+	const Vertex* pp2 = nullptr;
+	const Vertex* pp3 = nullptr;
 	if (FloatEqual(p1.pos.y, p2.pos.y)) {
-		pp2 = p1;
-		pp3 = p2;
-		pp1 = p3;
+		pp2 = &p1;
+		pp3 = &p2;
+		pp1 = &p3;
 	} else if (FloatEqual(p2.pos.y, p3.pos.y)) {
-		pp2 = p2;
-		pp3 = p3;
-		pp1 = p1;
+		pp2 = &p2;
+		pp3 = &p3;
+		pp1 = &p1;
 	} else if (FloatEqual(p1.pos.y, p3.pos.y)) {
-		pp2 = p1;
-		pp3 = p3;
-		pp1 = p2;
+		pp2 = &p1;
+		pp3 = &p3;
+		pp1 = &p2;
 	}
 
-	float miny = pp1.pos.y;
-	float maxy = pp2.pos.y;
+    if (pp1 == nullptr ||
+        pp2 == nullptr ||
+        pp3 == nullptr)
+        return;
+    
+	float miny = pp1->pos.y;
+	float maxy = pp2->pos.y;
+    bool swap = false;
 	if (maxy < miny) {
 		std::swap(miny, maxy);
+        swap = true;
 	}
     
     int miny_int = FloatCoord2IntLow(miny);
@@ -59,10 +65,17 @@ void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Ve
 	int h = maxy_int - miny_int;
 	for (int i = miny_int; i <= maxy_int; i++) {
 		ScanLine line;
-		line._left = Lerp(pp2, pp1, float(i - miny_int) / h);
-//        line._left.pos.y = i;
-		line._right = Lerp(pp3, pp1, float(i - miny_int) / h);
-//        line._right.pos.y = i;
+        auto per = float(i - miny_int) / h;
+        if (!swap)
+            line._left = Lerp(*pp1, *pp2, per);
+        else
+            line._left = Lerp(*pp2, *pp1, per);
+        line._left.pos.y = i;
+        if (!swap)
+            line._right = Lerp(*pp1, *pp3, per);
+        else
+            line._right = Lerp(*pp3, *pp1, per);
+        line._right.pos.y = i;
 		line.ToVertexs(outVec);
 	}
 }
@@ -95,6 +108,7 @@ void Rasterizer::Rasterize(const Vertex& p1, const Vertex& p2, const Vertex& p3,
 			Swap(vMin, vMiddle);
 
 		auto p4 = Lerp(vMin, vMax, PercentageFromY(vMiddle, vMin, vMax));
+        p4.pos.y = vMiddle.pos.y;
 		RasterizeHorizon(vMin, vMiddle, p4, outVec);
 		RasterizeHorizon(vMax, vMiddle, p4, outVec);
 	}

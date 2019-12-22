@@ -13,6 +13,8 @@ class PipelineContex {
     }
     bool IsWireFrameMode() { return _isWireFrameMode; }
     
+    bool CheckColorBuffer(const Color& c);
+    
  public:
 	IDeviceAPI * _pDeviceAPI;
 	std::vector<Vertex> _vertexes;

@@ -107,18 +107,54 @@ void Texture::Load(const std::string &path)
     png_read(path.c_str(), _data);
 }
 
-Color Texture::GetColor(const Vector2f &uv)
+Color Texture::GetColor(const Vector2f &uv, FilterType filter)
 {
+    auto u = uv.x * (_data->width-1);
+    auto v = uv.y * (_data->height-1);
+    switch (filter) {
+        case Point:
+            return Sample((int)(u), (int)(v));
+            break;
+        case Bilinear:
+        {
+            int u1 = floor(u);
+            int u2 = ceil(u);
+            int v1 = floor(v);
+            int v2 = ceil(v);
+            auto c1 = Sample(u1, v1);
+            auto c2 = Sample(u1, v2);
+            auto ret1 = Lerp(c1, c2, v - v1);
+            c1 = Sample(u2, v1);
+            c2 = Sample(u2, v2);
+            auto ret2 = Lerp(c1, c2, v - v1);
+            return Lerp(ret1, ret2, u - u1);
+            break;
+        }
+        default:
+            return Sample((int)(u), (int)(v));
+            break;
+    }
+}
+
+Color Texture::Sample(int x, int y) { 
     Color ret;
     if (_data)
     {
-        int row = _data->height - (int)(uv.y * (_data->height - 1)) - 1;
-        int col = (int)(uv.x * (_data->width - 1));
-        int idx = row * _data->width * 4 + col * 4;
-        ret.r = _data->data[idx] / 255.0f;
-        ret.g = _data->data[idx+1] / 255.0f;
-        ret.b = _data->data[idx+2] / 255.0f;
+        if (x >= _data->width || y >= _data->height)
+            return Color(1.0f, 0.0f, 0, 1);
+        
+        if (x < 0 || y < 0)
+            return Color(0.0f, 1.0f, 0, 1);
+        
+        auto tmp = 1.0f / 255.0f;
+        int idx = x * _data->width * 4 + y * 4;
+        ret.r = _data->data[idx] * tmp;
+        ret.g = _data->data[idx+1] * tmp;
+        ret.b = _data->data[idx+2] * tmp;
         ret.a = 1.0f;
+        return ret;
+//        return Color(0.0f, 1.0f, 0, 1);
     }
     return ret;
 }
+

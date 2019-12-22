@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A288DD5238A608F00CA287D /* ScreenMappingStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A288DD3238A608F00CA287D /* ScreenMappingStage.cpp */; };
 		4A38CEF42171C3B2005278A4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A38CEDD2171C3B2005278A4 /* Application.cpp */; };
 		4A38CEF52171C3B2005278A4 /* Pipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A38CEE52171C3B2005278A4 /* Pipeline.cpp */; };
 		4A38CEF62171C3B2005278A4 /* PipelineContex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A38CEE62171C3B2005278A4 /* PipelineContex.cpp */; };
@@ -37,6 +38,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A288DD3238A608F00CA287D /* ScreenMappingStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenMappingStage.cpp; sourceTree = "<group>"; };
+		4A288DD4238A608F00CA287D /* ScreenMappingStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenMappingStage.h; sourceTree = "<group>"; };
 		4A38CEA12171C129005278A4 /* SoftRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoftRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A38CEDC2171C3B2005278A4 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		4A38CEDD2171C3B2005278A4 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				4A38CEE62171C3B2005278A4 /* PipelineContex.cpp */,
 				4A38CEE72171C3B2005278A4 /* Pipeline.h */,
 				4A38CEE82171C3B2005278A4 /* PipelineStage.h */,
+				4A288DD3238A608F00CA287D /* ScreenMappingStage.cpp */,
+				4A288DD4238A608F00CA287D /* ScreenMappingStage.h */,
 			);
 			path = Pipeline;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A38CEFA2171C3B2005278A4 /* BaseType.cpp in Sources */,
+				4A288DD5238A608F00CA287D /* ScreenMappingStage.cpp in Sources */,
 				4A38CF07217C65B6005278A4 /* FragmentStage.cpp in Sources */,
 				4A38CEF92171C3B2005278A4 /* Renderer.cpp in Sources */,
 				4A38CEF82171C3B2005278A4 /* DeviceAPI.cpp in Sources */,
@@ -421,6 +427,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.35/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REZ_SEARCH_PATHS = ../../res;
+				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Debug;
 		};
@@ -440,6 +447,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.35/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REZ_SEARCH_PATHS = ../../res;
+				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Release;
 		};

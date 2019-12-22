@@ -19,3 +19,40 @@ void PipelineContex::Clear() {
 	for (int i = 0; i < w * h; i++)
 		_depthBuffer[i] = 1.0f;
 }
+
+bool PipelineContex::CheckColorBuffer(const Color &c) {
+    auto w = _pDeviceAPI->PixelWidth();
+    auto h = _pDeviceAPI->PixelHeight();
+    for (int i = 0; i < h; i++)
+    {
+        bool begin = false;
+        bool end = false;
+        for (int j = 0; j < w; j++)
+        {
+            if (_colorBuffer[i * w + j] == c)
+            {
+                if (!begin)
+                {
+                    begin = true;
+                }
+                if (end)
+                {
+                    _colorBuffer[i * w + j] = Color(1, 0, 0, 1);
+                    return false;
+                }
+            }
+            else
+            {
+                if (begin)
+                {
+                    if (!end)
+                    {
+                        end = true;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+

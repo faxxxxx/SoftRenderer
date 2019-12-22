@@ -3,6 +3,7 @@
 #include "Core/Graphic/Pipeline/TestStage.h"
 #include "Core/Graphic/Pipeline/TestStage2.h"
 #include "Core/Graphic/Pipeline/FragmentStage.h"
+#include "Core/Graphic/Pipeline/ScreenMappingStage.h"
 #include "Core/Graphic/Pipeline/RasterizationStage.h"
 #include "DeviceAPI.h"
 
@@ -40,6 +41,7 @@ void Renderer::SetupPipeline() {
 	_pPipeline->SetContex(pCtx);
 	_pPipeline->AddStage(new TestStage())
 	.AddStage(new TestStage2())
+    .AddStage(new ScreenMappingStage())
 	.AddStage(new RasterizationStage())
 	.AddStage(new FragmentStage());
 }

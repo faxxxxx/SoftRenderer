@@ -1,4 +1,5 @@
 #include "BaseType.h"
+#include <algorithm>
 
 float Angle2Rad(float angle)
 {
@@ -39,22 +40,22 @@ bool FloatIsZero(float a)
 
 int FloatCoord2IntLow(float v)
 {
-    return (int)v;
-    if (v - int(v) < 0.05f)
-        return int(v)-1;
+//    return (int)v-1;
+    if (v - int(v) < 0.5f)
+        return int(v);
     return int(v)+1;
 }
 
 int FloatCoord2IntHigh(float v)
 {
-    return (int)v;
-    if (v - int(v) >= 0.05f)
+//    return (int)v+1;
+    if (v - int(v) >= 0.5f)
         return int(v)+1;
     return int(v);
 }
 
 float Lerp(float from, float to, float percentage) {
-	return from + (to - from) * percentage;
+    return from + percentage * (to - from);
 }
 
 Color Lerp(const Color &from, const Color &to, float percentage) {
@@ -74,6 +75,15 @@ Vector3f Lerp(const Vector3f &from, const Vector3f &to, float percentage) {
 	return ret;
 }
 
+Vector4f Lerp(const Vector4f &from, const Vector4f &to, float percentage) {
+    Vector4f ret;
+    ret.x = Lerp(from.x, to.x, percentage);
+    ret.y = Lerp(from.y, to.y, percentage);
+    ret.z = Lerp(from.z, to.z, percentage);
+    ret.w = Lerp(from.w, to.w, percentage);
+    return ret;
+}
+
 Vector2f Lerp(const Vector2f &from, const Vector2f &to, float percentage) {
     Vector2f ret;
     ret.x = Lerp(from.x, to.x, percentage);
@@ -81,11 +91,23 @@ Vector2f Lerp(const Vector2f &from, const Vector2f &to, float percentage) {
     return ret;
 }
 
-Vector2f LerpUV(const Vector2f &from, float fromz, const Vector2f &to, float toz, float percentage) {
+Vector2f LerpUV(const Vector2f &from, float fw, const Vector2f &to, float tw, float percentage) {
     Vector2f ret;
-    float z = Lerp(fromz, toz, percentage);
-    ret.x = Lerp(from.x / fromz, to.x / toz, percentage) * z;
-    ret.y = Lerp(from.y / fromz, to.y / toz, percentage) * z;
+    auto rfw = 1 / fw;
+    auto rtw = 1 / tw;
+    float lerpw = 1/Lerp(rfw, rtw, percentage);
+    ret.x = Lerp(from.x * rfw, to.x * rtw, percentage) * lerpw;
+    ret.y = Lerp(from.y * rfw, to.y * rtw, percentage) * lerpw;
+//    if (ret.x < 0)
+//        ret.x = 0;
+//    if (ret.x > 1)
+//        ret.x = 1;
+//    if (ret.y < 0)
+//        ret.y = 0;
+//    if (ret.y > 1)
+//        ret.y = 1;
+    ret.x = Clamp(std::min(from.x, to.x), std::max(from.x, to.x), ret.x);
+    ret.y = Clamp(std::min(from.y, to.y), std::max(from.y, to.y), ret.y);
     return ret;
 }
 
@@ -94,7 +116,16 @@ Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
 	ret.pos = Lerp(from.pos, to.pos, percentage);
 	ret.color = Lerp(from.color, to.color, percentage);
 	ret.normal = Lerp(from.normal, to.normal, percentage);
-//    ret.uv = LerpUV(from.uv, from.pos.z, to.uv, to.pos.z, percentage);
-    ret.uv = Lerp(from.uv, to.uv, percentage);
+    ret.uv = LerpUV(from.uv, from.pos.w, to.uv, to.pos.w, percentage);
+    //ret.uv = Lerp(from.uv, to.uv, percentage);
 	return ret;
+}
+
+float Clamp(float min, float max, float v)
+{
+    if (v < min)
+        return min;
+    if (v > max)
+        return max;
+    return v;
 }

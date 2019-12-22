@@ -3,15 +3,17 @@
 
 Texture *pTex = nullptr;
 
+
+
 void FragmentStage::Init(PipelineContex *ctx) {
     pTex = new Texture();
-    pTex->Load("box.png");
+    pTex->Load("icon.png");
 }
 
 bool FragmentStage::Execute(PipelineContex * ctx) {
     auto w = ctx->_pDeviceAPI->PixelWidth();
     auto h = ctx->_pDeviceAPI->PixelHeight();
-    auto maxIdx = w * h;
+    auto maxIdx = (w - 1) * (h - 1);
     Color c;
 	for (auto& frag : ctx->_fragments) {
 		int idx = ToBufferIndex(frag.pos, ctx);
@@ -24,6 +26,8 @@ bool FragmentStage::Execute(PipelineContex * ctx) {
             ColorBlend(idx, c, ctx);
 		}
 	}
+    
+    ctx->CheckColorBuffer(Color(0, 1.0f, 0, 1.0f));
     
     for(int i = 0; i < h; i++)
     {
@@ -50,7 +54,13 @@ void FragmentStage::ColorBlend(int idx, const Color &c, PipelineContex *ctx) {
 	ctx->_colorBuffer[idx] = c;
 }
 
-int FragmentStage::ToBufferIndex(const Vector3f &pos, PipelineContex *ctx) {
+int FragmentStage::ToBufferIndex(const Vector4f &pos, PipelineContex *ctx) {
 	auto w = ctx->_pDeviceAPI->PixelWidth();
+    auto h = ctx->_pDeviceAPI->PixelHeight();
+    if (pos.x > w - 1 || pos.x < 0)
+        return -1;
+    if (pos.y > h - 1 || pos.y < 0)
+        return -1;
+    
 	return pos.y * w + pos.x;
 }

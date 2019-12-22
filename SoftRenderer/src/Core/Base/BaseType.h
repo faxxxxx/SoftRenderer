@@ -11,7 +11,6 @@
 
 float Angle2Rad(float angle);
 
-
 struct Color {
 	Color();
 	Color(float _r, float _g, float _b, float _a=1.0f);
@@ -47,7 +46,8 @@ struct Color {
 	static const Color GRAY;
 };
 
-struct Vector3f {
+class Vector4f;
+class Vector3f {
  public:
 	Vector3f() : x(0.f), y(0.f), z(0.f) {}
 	Vector3f(float inX, float inY, float inZ) {
@@ -105,35 +105,7 @@ struct Vector3f {
 	float x, y, z;
 };
 
-struct Vector2f {
- public:
-	Vector2f() : x(0.f), y(0.f) {}
-	Vector2f(float inX, float inY) {
-		x = inX;
-		y = inY;
-	}
-    Vector2f(const Vector3f &p)
-    {
-        x = p.x;
-        y = p.y;
-    }
-	explicit Vector2f(const float* array) {
-		x = array[0];
-		y = array[1];
-	}
-	void Set(float inX, float inY) {
-		x = inX;
-	}
-	void Set(const float* array) {
-		x = array[0];
-		y = array[1];
-	}
-
- public:
-	float x, y;
-};
-
-struct Vector4f {
+class Vector4f {
 public:
     Vector4f() : x(0.f), y(0.f), z(0.f), w(0.0f) {}
     Vector4f(float inX, float inY, float inZ, float inW) {
@@ -172,19 +144,53 @@ public:
     float x, y, z, w;
 };
 
+class Vector2f {
+ public:
+    Vector2f() : x(0.f), y(0.f) {}
+    Vector2f(float inX, float inY) {
+        x = inX;
+        y = inY;
+    }
+    Vector2f(const Vector3f &p)
+    {
+        x = p.x;
+        y = p.y;
+    }
+    Vector2f(const Vector4f &p)
+    {
+        x = p.x;
+        y = p.y;
+    }
+    explicit Vector2f(const float* array) {
+        x = array[0];
+        y = array[1];
+    }
+    void Set(float inX, float inY) {
+        x = inX;
+    }
+    void Set(const float* array) {
+        x = array[0];
+        y = array[1];
+    }
+
+ public:
+    float x, y;
+};
 
 struct Vertex {
-	Vector3f pos;
+	Vector4f pos;
 	Color color;
 	Vector3f normal;
     Vector2f uv;
+    float w;//转换到投影空间下的w
+    Vector2f screenPos;//屏幕空间
     Vertex(){}
-    Vertex(const Vector3f& p, const Color& c)
+    Vertex(const Vector4f& p, const Color& c)
     {
         pos = p;
         color = c;
     }
-    Vertex(const Vector3f &p, const Color &c, const Vector2f &uv)
+    Vertex(const Vector4f &p, const Color &c, const Vector2f &uv)
     {
         pos = p;
         color = c;
@@ -194,7 +200,7 @@ struct Vertex {
 
 struct Fragment : public Vertex {
     Fragment() {}
-    Fragment(const Vector3f& p, const Color& c) : Vertex(p, c){}
+    Fragment(const Vector4f& p, const Color& c) : Vertex(p, c){}
 };
 
 bool FloatEqual(float a, float b);
@@ -211,3 +217,5 @@ Vector3f Lerp(const Vector3f &from, const Vector3f &to, float percentage);
 Vector2f Lerp(const Vector2f &from, const Vector2f &to, float percentage);
 Vector2f LerpUV(const Vector2f &from, float fromz, const Vector2f &to, float toz, float percentage);
 Fragment Lerp(const Vertex &from, const Vertex &to, float percentage);
+
+float Clamp(float min, float max, float v);

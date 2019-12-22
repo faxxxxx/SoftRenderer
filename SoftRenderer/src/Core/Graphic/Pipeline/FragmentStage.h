@@ -9,5 +9,5 @@ class FragmentStage : public PipelineStage {
  private:
 	bool ZTestPass(int idx, float newz, PipelineContex *ctx);
 	void ColorBlend(int idx, const Color &c, PipelineContex *ctx);
-	int ToBufferIndex(const Vector3f &pos, PipelineContex *ctx);
+	int ToBufferIndex(const Vector4f &pos, PipelineContex *ctx);
 };
