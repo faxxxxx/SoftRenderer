@@ -127,7 +127,6 @@ class TestStage2 : public PipelineStage {
 //            ctx->_pDeviceAPI->DrawPixel(Vector2f(pt.pos.x, pt.pos.y), pt.color);
 //        }
 
-<<<<<<< HEAD
         auto mat = _cam.GetProjectMatrix();
         auto camMat = _cam.GetCameraMatix();
         
@@ -146,42 +145,13 @@ class TestStage2 : public PipelineStage {
             ctx->_vertexes.emplace_back(ConvertToProjectionSpace(v.pos, mat), v.color, v.uv);
         }
         ctx->_indexes.insert(ctx->_indexes.end(), _indexes.begin(), _indexes.end());
-=======
-		auto mat = _cam.GetProjectMatrix();
-		auto camMat = _cam.GetCameraMatix();
-
-		Matrix4x4f rotateMat;
-		_angle += 0.4f;
-		if (_angle > 360.0f) {
-			_angle = 0.0f;
-		}
-		rotateMat.RotateAxixY(_angle);
-
-		mat = mat.MultiplyMatrix4x4(camMat);
-		mat = mat.MultiplyMatrix4x4(rotateMat);
-		for(auto &v : _verts) {
-			ctx->_vertexes.emplace_back(ConvertToProjectionSpace(v.pos, mat), v.color, v.uv);
-		}
-		ctx->_indexes.insert(ctx->_indexes.end(), _indexes.begin(), _indexes.end());
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 		return true;
 	}
 
  private:
-<<<<<<< HEAD
-    
-    Vector4f ConvertToProjectionSpace(const Vector4f &p, const Matrix4x4f &mat)
-    {
-        auto result = mat.MultiplyVector4(Vector4f(p));
-        auto ww = 1.0f/result.w;
-        return Vector4f(result.x * ww, result.y * ww, result.z * ww, result.w);
-    }
-=======
-
-	Vector3f ConvertToProjectionSpace(const Vector3f &p, const Matrix4x4f &mat) {
-		auto result = mat.MultiplyVector4(Vector4f(p));
+	Vector3f ConvertToProjectionSpace(const Vector4f &p, const Matrix4x4f &mat) {
+		auto result = mat.MultiplyVector4(p);
 		assert(!FloatIsZero(result.w));
 		return Vector3f(result.x/result.w, result.y/result.w, result.z/result.w);
 	}
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 };

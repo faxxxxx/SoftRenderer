@@ -43,7 +43,6 @@ void AssertNotZero(float a) {
 	assert(!FloatIsZero(a));
 }
 
-<<<<<<< HEAD
 int FloatCoord2IntLow(float v)
 {
 //    return (int)v-1;
@@ -62,24 +61,6 @@ int FloatCoord2IntHigh(float v)
 
 float Lerp(float from, float to, float percentage) {
     return from + percentage * (to - from);
-=======
-int FloatCoord2IntLow(float v) {
-	return (int)v;
-	if (v - int(v) < 0.05f)
-		return int(v)-1;
-	return int(v)+1;
-}
-
-int FloatCoord2IntHigh(float v) {
-	return (int)v;
-	if (v - int(v) >= 0.05f)
-		return int(v)+1;
-	return int(v);
-}
-
-float Lerp(float from, float to, float percentage) {
-	return (1 - percentage) * from + percentage * to;
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 }
 
 Color Lerp(const Color &from, const Color &to, float percentage) {
@@ -115,7 +96,6 @@ Vector2f Lerp(const Vector2f &from, const Vector2f &to, float percentage) {
 	return ret;
 }
 
-<<<<<<< HEAD
 Vector2f LerpUV(const Vector2f &from, float fw, const Vector2f &to, float tw, float percentage) {
     Vector2f ret;
     auto rfw = 1 / fw;
@@ -134,14 +114,6 @@ Vector2f LerpUV(const Vector2f &from, float fw, const Vector2f &to, float tw, fl
     ret.x = Clamp(std::min(from.x, to.x), std::max(from.x, to.x), ret.x);
     ret.y = Clamp(std::min(from.y, to.y), std::max(from.y, to.y), ret.y);
     return ret;
-=======
-Vector2f LerpUV(const Vector2f &from, float fromz, const Vector2f &to, float toz, float percentage) {
-	Vector2f ret;
-	float z = Lerp(fromz, toz, percentage);
-	ret.x = Lerp(from.x / fromz, to.x / toz, percentage) * z;
-	ret.y = Lerp(from.y / fromz, to.y / toz, percentage) * z;
-	return ret;
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 }
 
 Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
@@ -149,13 +121,8 @@ Fragment Lerp(const Vertex &from, const Vertex &to, float percentage) {
 	ret.pos = Lerp(from.pos, to.pos, percentage);
 	ret.color = Lerp(from.color, to.color, percentage);
 	ret.normal = Lerp(from.normal, to.normal, percentage);
-<<<<<<< HEAD
     ret.uv = LerpUV(from.uv, from.pos.w, to.uv, to.pos.w, percentage);
     //ret.uv = Lerp(from.uv, to.uv, percentage);
-=======
-//    ret.uv = LerpUV(from.uv, from.pos.z, to.uv, to.pos.z, percentage);
-	ret.uv = Lerp(from.uv, to.uv, percentage);
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 	return ret;
 }
 

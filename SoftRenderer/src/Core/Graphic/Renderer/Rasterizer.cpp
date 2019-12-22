@@ -7,7 +7,6 @@
 class ScanLine {
  public:
 	void ToVertexs(std::vector<Fragment> &outVec) {
-<<<<<<< HEAD
         const Vertex* pLeft = &_left;
         const Vertex* pRight = &_right;
         if (_left.pos.x > _right.pos.x)
@@ -25,23 +24,6 @@ class ScanLine {
             v.pos.x = fx + x;
             outVec.push_back(v);
         }
-=======
-		if (_left.pos.x < _right.pos.x) {
-			int fx = FloatCoord2IntLow(_left.pos.x);
-			int tx = FloatCoord2IntHigh(_right.pos.x);
-			int w = tx - fx;
-			for (int x = fx; x <= tx; x++) {
-				outVec.push_back(Lerp(_left, _right, fabs(float(x - fx) / w)));
-			}
-		} else {
-			int fx = FloatCoord2IntLow(_right.pos.x);
-			int tx = FloatCoord2IntHigh(_left.pos.x);
-			int w = tx - fx;
-			for (int x = fx; x <= tx; x++) {
-				outVec.push_back(Lerp(_right, _left, fabs(float(x - fx) / w)));
-			}
-		}
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 	}
 
 	Vertex _left;
@@ -61,17 +43,9 @@ void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Ve
 		pp3 = &p3;
 		pp1 = &p1;
 	} else if (FloatEqual(p1.pos.y, p3.pos.y)) {
-<<<<<<< HEAD
 		pp2 = &p1;
 		pp3 = &p3;
 		pp1 = &p2;
-=======
-		pp2 = p1;
-		pp3 = p3;
-		pp1 = p2;
-	} else {
-		assert(false);
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 	}
 
     if (pp1 == nullptr ||
@@ -90,10 +64,9 @@ void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Ve
 	int miny_int = FloatCoord2IntLow(miny);
 	int maxy_int = FloatCoord2IntHigh(maxy);
 	int h = maxy_int - miny_int;
-	AssertNotZero(h);
+	//AssertNotZero(h);
 	for (int i = miny_int; i <= maxy_int; i++) {
 		ScanLine line;
-<<<<<<< HEAD
         auto per = float(i - miny_int) / h;
         if (!swap)
             line._left = Lerp(*pp1, *pp2, per);
@@ -105,13 +78,6 @@ void Rasterizer::RasterizeHorizon(const Vertex & p1, const Vertex & p2, const Ve
         else
             line._right = Lerp(*pp3, *pp1, per);
         line._right.pos.y = i;
-=======
-		line._left = Lerp(pp2, pp1, float(i - miny_int) / h);
-//        line._left.pos.y = i;
-		line._right = Lerp(pp3, pp1, float(i - miny_int) / h);
-//        line._right.pos.y = i;
-
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 		line.ToVertexs(outVec);
 	}
 }
@@ -145,11 +111,7 @@ void Rasterizer::Rasterize(const Vertex& p1, const Vertex& p2, const Vertex& p3,
 			Swap(vMin, vMiddle);
 
 		auto p4 = Lerp(vMin, vMax, PercentageFromY(vMiddle, vMin, vMax));
-<<<<<<< HEAD
         p4.pos.y = vMiddle.pos.y;
-=======
-		p4.pos.y = vMiddle.pos.y;
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 		RasterizeHorizon(vMin, vMiddle, p4, outVec);
 		RasterizeHorizon(vMax, vMiddle, p4, outVec);
 	}

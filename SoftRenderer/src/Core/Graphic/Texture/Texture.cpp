@@ -99,7 +99,6 @@ void Texture::Load(const std::string &path) {
 	png_read(path.c_str(), _data);
 }
 
-<<<<<<< HEAD
 Color Texture::GetColor(const Vector2f &uv, FilterType filter)
 {
     auto u = uv.x * (_data->width-1);
@@ -149,19 +148,5 @@ Color Texture::Sample(int x, int y) {
 //        return Color(0.0f, 1.0f, 0, 1);
     }
     return ret;
-=======
-Color Texture::GetColor(const Vector2f &uv) {
-	Color ret;
-	if (_data) {
-		int row = _data->height - (int)(uv.y * (_data->height - 1)) - 1;
-		int col = (int)(uv.x * (_data->width - 1));
-		int idx = row * _data->width * 4 + col * 4;
-		ret.r = _data->data[idx] / 255.0f;
-		ret.g = _data->data[idx+1] / 255.0f;
-		ret.b = _data->data[idx+2] / 255.0f;
-		ret.a = 1.0f;
-	}
-	return ret;
->>>>>>> b7b5aad2bc36670a6d5a09fc7a81964ff5befb55
 }
 
